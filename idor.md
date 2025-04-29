@@ -10,8 +10,6 @@ IDOR arises when an application uses user-supplied input to access objects direc
 
 In simple words, IDOR is a vulnerability where the application fails to enforce proper access control, allowing an **unauthorized user to access or manipulate resources** they shouldn't be able to access.
 
----
-
 ### 🧪 Example
 
 Imagine a web application that stores user invoices:  
