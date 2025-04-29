@@ -13,12 +13,8 @@ In simple words, IDOR is a vulnerability where the application fails to enforce 
 ### 🧪 Example
 
 Imagine a web application that stores user invoices:  
-Ravi access his invoice using this URL:  
-`https://example.com/invoice?id=1001`  
-
-Now, if Sam change the ID to `2002`:  
-`https://example.com/invoice?id=2002`  
-— and he can see **Ravi's invoice** without being authorized,  
-this indicates an **IDOR vulnerability**.
+Ravi access his invoice using this URL:  `https://example.com/invoice?id=1001`   
+Now, if Sam change the ID to `2002`: `https://example.com/invoice?id=2002`   
+— and he can see **Ravi's invoice** without being authorized, this indicates an **IDOR vulnerability**.
 
 Why? Because the application is **directly referencing objects (like invoice IDs)** without checking **if you’re allowed to access them**.
