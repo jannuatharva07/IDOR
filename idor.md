@@ -19,8 +19,7 @@ Ravi accesses his invoice using this URL:
 Now, if Sam changes the ID to `1002`:  
 `https://example.com/invoice?id=1002`  
 
-— and he can see **Ravi's invoice** without authorization, this indicates an **IDOR vulnerability**.
-
+— and he can see **Ravi's invoice** without authorization, this indicates an **IDOR vulnerability**.  
 Why? Because the application is **directly referencing objects (like invoice IDs)** without verifying **if the user is allowed to access them**.
 ---
 ## Scenarios - IDOR
