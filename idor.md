@@ -176,7 +176,7 @@ If a regular ID replacement isn’t working, try wrapping the ID in an array and
 {“id”:19} → {“id”:[19]}
 ```
 
-## Testcase - 9: Wildcard ID
+### Testcase - 9: Wildcard ID
 
 ```markdown
 These can be very exciting bugs to find in the wild and are so simple. Try replacing an ID with a wildcard. You might get lucky!
