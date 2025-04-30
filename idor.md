@@ -124,16 +124,17 @@ Tip: Try switching POST and PUT and see if you can upload something to another u
 
 ### Testcase - 5: Try changing the request’s content type
 
-```jsx
+
 Instead of this:
-```
+
+```jsx
 POST /api/chat/join/123
 […]
 Content-type: application/xml → 
 <user>test</user>    
 ```
 Try this:
-```
+```jsx
 POST /api/chat/join/123
 […]
 Content-type: application/json
