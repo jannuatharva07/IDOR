@@ -51,9 +51,13 @@ IDORs often hide in plain sight! Here's where to look:
 - Any **ID-like values** in URLs or requests (e.g., `userId`, `invoice`, `docId`)
 - **APIs** are full of IDORs – especially REST APIs
 - Apps with **complex permissions** or roles (admin/user/mod)
-- **CRUD** operations – test each:
-  - Create ➕
-  - Read 👁️
-  - Update ✏️
-  - Delete ❌
+- **CRUD** operations – test each on someone else’s data:
+  - **Create ➕** – Can you create something *on behalf of another user*?
+  - **Read 👁️** – Can you view *someone else’s private data*?
+  - **Update ✏️** – Can you modify *another user’s content*?
+  - **Delete ❌** – Can you delete *someone else’s resource or account*?
 
+
+
+
+llll
