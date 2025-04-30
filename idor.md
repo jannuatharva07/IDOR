@@ -140,7 +140,7 @@ POST /api/chat/join/123
 Content-type: application/json
 {“user”: “test”}
 ```
-
+```jsx
 Tip: Access controls may be inconsistently implemented across different content types. Don’t forget to try alternative and less common values like text/xml, text/x-json, and similar.
 ```
 
