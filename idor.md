@@ -57,7 +57,22 @@ IDORs often hide in plain sight! Here's where to look:
   - **Update ✏️** – Can you modify *another user’s content*?
   - **Delete ❌** – Can you delete *someone else’s resource or account*?
 
+## 🧠 Smart IDOR Hunting
 
+- Always inspect the **ID structure** (plain, base64, encrypted?).
+- Look for **leaks** (e.g., public profile showing a user ID).
+- Spot **patterns** in IDs (incrementing, UUID, usernames,).
+- Try **generating IDs** yourself or use **Burp Intruder** to fuzz.
 
+## Base Steps to Test for IDOR
 
-llll
+1. **Create 2 accounts** (e.g., userA and userB) or try to **enumerate other users**.
+
+2. **Find endpoints** and check:
+   - Does the URL or request contain any **ID or username**?
+   - Is the **endpoint public** (no login needed) or **private** (requires login)?
+
+3. While logged in as userA, **change the ID/username in the request to userB's** and check:
+   - Can you view, update, delete, or perform actions on userB’s data?
+
+4. If yes → 🎯 **Potential IDOR found!**
