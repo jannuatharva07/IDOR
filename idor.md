@@ -41,4 +41,19 @@ Why? Because the application is **directly referencing objects (like invoice IDs
 ### 4. Accessing Functionality via Parameter
    URL:`https://foo.bar/accessPage?menuitem=12`  
    The menuitem controls what feature/page you access.  
-   If you’re only allowed menuitem=1,2,3 but access 12 anyway → ❗ IDOR
+   If you’re only allowed menuitem=1,2,3 but access 12 anyway → ❗ IDOR  
+
+## 🔎 Where to Find IDORs?
+
+IDORs often hide in plain sight! Here's where to look:
+
+### 📍 Common Spots
+- Any **ID-like values** in URLs or requests (e.g., `userId`, `invoice`, `docId`)
+- **APIs** are full of IDORs – especially REST APIs
+- Apps with **complex permissions** or roles (admin/user/mod)
+- **CRUD** operations – test each:
+  - Create ➕
+  - Read 👁️
+  - Update ✏️
+  - Delete ❌
+
