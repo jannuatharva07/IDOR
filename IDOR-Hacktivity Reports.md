@@ -1,3 +1,7 @@
+> 🔰 **New to IDOR?**  
+> Please start with the [Introduction to IDOR](https://github.com/jannuatharva07/IDOR/blob/main/idor.md) before reading real-world reports.  
+
+
 **Learn IDOR from hacktivity reports**
 
 # Hacktivity Reports
