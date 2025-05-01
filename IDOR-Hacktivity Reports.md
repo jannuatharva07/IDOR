@@ -16,7 +16,6 @@ Always test for IDOR vulnerabilities in APIs by verifying if any parameters (lik
 
 **[Read Full Report](https://hackerone.com/reports/751577)**
 
----
 
 ## 2. **IDOR - Deleting Other User's Certifications**
 **Report ID:** 2122671  
@@ -28,7 +27,6 @@ Always verify that the IDs used in requests (such as for certifications or licen
 
 **[Read Full Report](https://hackerone.com/reports/2122671)**
 
----
 
 ## 3. **IDOR - Deleting Campaigns**
 **Report ID:** 1969141  
@@ -40,7 +38,6 @@ Always check if any ID is encrypted or encoded in requests. If not, they are vul
 
 **[Read Full Report](https://hackerone.com/reports/1969141)**
 
----
 
 ## 4. **IDOR - Missing Ownership Check on Remote Wipe**
 **Report ID:** 819807  
@@ -52,7 +49,6 @@ By changing `{device_id}` to another user’s ID, an attacker could wipe someone
 
 **[Read Full Report](https://hackerone.com/reports/819807)**
 
----
 
 ## 5. **IDOR - Edit Anyone's Blog/Website Info**
 **Report ID:** 974222  
@@ -68,7 +64,6 @@ Always test if IDs in requests can be modified. Check if changing IDs in user-re
  
 **[Read Full Report](https://hackerone.com/reports/974222)**
 
----
 
 ## 6. **IDOR - Account Takeover via Edit User (Crowd Signal)**
 **Report ID:** 915114  
@@ -82,7 +77,6 @@ Always check if user-specific actions can be bypassed by simply modifying the `i
 
 **[Read Full Report](https://hackerone.com/reports/915114)**
 
----
 
 ## 7. **IDOR - Change Product Price During Checkout**
 **Report ID:** 1403176  
@@ -97,7 +91,6 @@ Attacker changed the price of a product while buying it!
 
 **[Read Full Report](https://hackerone.com/reports/1403176)**
 
----
 
 ## 8. **IDOR - Message Deletion via HTTP Method Manipulation**
 **Report ID:** 1213237  
@@ -114,7 +107,6 @@ Sometimes, **changing the HTTP method** (e.g., `GET` to `DELETE`) can lead to un
 
 **[Read Full Report](https://hackerone.com/reports/1213237)**
 
----
 
 ## 9. **IDOR - JSON Endpoint Reveals Raw User Data**
 **Report ID:** 703894  
@@ -126,7 +118,6 @@ Always look for `.json` or `.xml` versions of public pages — these can sometim
 
 **[Read Full Report](https://hackerone.com/reports/703894)**
 
----
 
 ## 10. **IDOR - Read-Only User Can Delete Users**
 **Report ID:** 888729  
@@ -138,7 +129,6 @@ By changing the `user_id` in the request to a guest from org H1, the attacker wa
 
 **[Read Full Report](https://hackerone.com/reports/888729)**
 
----
 
 ## 11. **IDOR - Account Takeover via Profile Update**
 **Report ID:** 1272478  
@@ -152,7 +142,7 @@ By changing the `user_id` in the request to a guest from org H1, the attacker wa
   
 **[Read Full Report](https://hackerone.com/reports/1272478)**
 
----
+
 ## 12. **IDOR - Delete Anyone’s Spotlight Content (Snapchat)**
 **Report ID:** 1819832  
 **What Happened:**  
@@ -167,7 +157,6 @@ If delete operations use predictable IDs without ownership checks, attackers can
 
 **[Read Full Report](https://hackerone.com/reports/1819832)**
 
----
 
 # Reference:
 
