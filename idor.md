@@ -195,13 +195,11 @@ It is possible that the application may not enforce access control for this new 
 ```
 
 ### Testcase - 11: Performing Operations on Parameter Value (e.g., IDs)
-
-```markdown
 **Learnt from [Deev Pal](https://x.com/techycodec08)**
+```markdown
 Sometimes, IDOR vulnerabilities are triggered by **arithmetic manipulation** of IDs, like using `-1`.
-**Example:**
-POST /updateUser
-user_id=1338&name=test
+Example:
+GET /viewUser?user_id=1338&name=test
 Try modifying the ID to:
 user_id=1338-1
 If the backend doesn’t properly validate or sanitize the input, it may resolve `1338-1` as `1337`, allowing unauthorized access to another user’s data.  
