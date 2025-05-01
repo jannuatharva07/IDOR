@@ -186,3 +186,7 @@ If delete operations use predictable IDs without ownership checks, attackers can
 [Medium](https://medium.com/)
 
 [Pentester Land](https://pentester.land/writeups/)
+
+
+## Author
+[AtharvaJannu](https://x.com/AtharvaJannu003)
