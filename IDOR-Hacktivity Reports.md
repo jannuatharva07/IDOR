@@ -94,3 +94,31 @@ Just changed **GET** to **DELETE** on message endpoint with `msg_id` in URL
 ### 9️⃣ 703894 – JSON Reveals Raw User Data  
 Some endpoints like `.../started.json` expose user data in raw JSON format  
 ➡️ No authentication or filtering → Sensitive data exposed
+
+---
+
+### 🔟 888729 – Read-Only User Can Delete Users  
+ID was in URL.  
+Two orgs created (H1 and H2) with guest users.  
+➡️ In H2, admin deletes guest → Intercept request  
+➡️ Change ID to guest from H1 → That guest gets deleted 😬  
+❗ No proper permission check → Classic IDOR
+
+---
+
+### 🔟 1272478 – ATO (Account Takeover) via IDOR  
+1️⃣ Create 2 accounts – Attacker & Victim  
+2️⃣ Attacker updates their profile → Capture request (contains user ID)  
+3️⃣ Find victim’s user ID  
+4️⃣ Replace attacker’s ID with victim’s in the request  
+5️⃣ Change username → Now victim account is linked to attacker’s username  
+6️⃣ Reset password using that username → 🔓 Logged in as victim 😱  
+❗ No proper ownership check → ATO via IDOR
+
+---
+### 1️⃣1️⃣ 1819832 – Snapchat: Delete Anyone’s Spotlight Content 📸  
+1️⃣ Attacker captures their own spotlight **delete request**  
+2️⃣ ID of the content is in the request URL  
+3️⃣ Attacker finds another post’s ID (visible in spotlight URLs)  
+4️⃣ Changes the ID in the request → Deletes someone else’s post ❌  
+❗ No ownership check on delete request = IDOR!
