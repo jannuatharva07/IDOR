@@ -166,3 +166,23 @@ By changing the `user_id` in the request to a guest from org H1, the attacker wa
 If delete operations use predictable IDs without ownership checks, attackers can delete other users’ content.   
 
 **[Read Full Report](https://hackerone.com/reports/1819832)**
+
+---
+
+# Reference:
+
+[KathanP19/HowToHunt](https://github.com/KathanP19/HowToHunt/blob/master/IDOR/IDOR.md)
+
+[Learn about Insecure Object Reference (IDOR) | BugBountyHunter.com](https://www.bugbountyhunter.com/vulnerability/?type=idor)
+
+[Hacktivity Reports](https://hackerone.com/hacktivity)
+
+[PortSwigger | Web Security Academy](https://portswigger.net/web-security/access-control/idor)
+
+[WSTG - v4.2](https://owasp.org/www-project-web-security-testing-guide/v42/4-Web_Application_Security_Testing/05-Authorization_Testing/04-Testing_for_Insecure_Direct_Object_References.html)
+
+[What I learnt from reading 220* IDOR bug reports.](https://medium.com/@Sm9l/what-i-learnt-from-reading-220-idor-bug-reports-6efbea44db7)
+
+[Medium](https://medium.com/)
+
+[Pentester Land](https://pentester.land/writeups/)
