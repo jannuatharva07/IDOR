@@ -55,8 +55,10 @@ By changing `{device_id}` to another user’s ID, an attacker could wipe someone
 3. Attacker viewed source code and noted the victim’s `id`.  
 4. Attacker went to their own profile, intercepted the blog/website update request using Burp Suite.  
 5. They changed the `id` to the victim’s and were able to change victim's blog info.
+
 **Key Insight:**  
-Always test if IDs in requests can be modified. Check if changing IDs in user-related data (e.g., blog, website) allows you to access or alter other users’ information.  
+Always test if IDs in requests can be modified. Check if changing IDs in user-related data (e.g., blog, website) allows you to access or alter other users’ information.
+ 
 **[Read Full Report](https://hackerone.com/reports/974222)**
 
 ---
@@ -67,8 +69,10 @@ Always test if IDs in requests can be modified. Check if changing IDs in user-re
 There was an endpoint that let users edit their own account info.  
 By modifying the `id` in the request URL, the attacker accessed and edited other users’ data.  
 **No user interaction was needed** — attacker didn’t need any help from the victim.  
+
 **Key Insight:**  
-Always check if user-specific actions can be bypassed by simply modifying the `id`.
+Always check if user-specific actions can be bypassed by simply modifying the `id`.  
+
 **[Read Full Report](https://hackerone.com/reports/915114)**
 
 ---
@@ -83,6 +87,7 @@ Attacker changed the price of a product while buying it!
 3. Intercept the request using **Burp Suite**.
 4. Modify the `price` parameter in the request before it reaches the server.
 5. Forward the request — the product was purchased at the changed (lower) price.
+
 **[Read Full Report](https://hackerone.com/reports/1403176)**
 
 ---
@@ -96,8 +101,10 @@ The attacker was able to delete a message by simply changing the HTTP method.
 2. They changed the request method from `GET` to `DELETE`.
 3. Added the `msg_id` in the URL path.
 4. Sent the modified request — the message got deleted.
+
 **Key Insight:**  
-Sometimes, **changing the HTTP method** (e.g., `GET` to `DELETE`) can lead to unauthorized actions if the backend does not properly restrict allowed methods. Always test all common HTTP methods on endpoints and observe server behavior.  
+Sometimes, **changing the HTTP method** (e.g., `GET` to `DELETE`) can lead to unauthorized actions if the backend does not properly restrict allowed methods. Always test all common HTTP methods on endpoints and observe server behavior.
+
 **[Read Full Report](https://hackerone.com/reports/1213237)**
 
 ---
@@ -106,8 +113,10 @@ Sometimes, **changing the HTTP method** (e.g., `GET` to `DELETE`) can lead to un
 **Report ID:** 703894  
 **What Happened:**  
 Some endpoints (like `.../started.json`) exposed raw user data in JSON format.  
+
 **Key Insight:**  
-Always look for `.json` or `.xml` versions of public pages — these can sometimes leak more information than intended.    
+Always look for `.json` or `.xml` versions of public pages — these can sometimes leak more information than intended.  
+
 **[Read Full Report](https://hackerone.com/reports/703894)**
 
 ---
@@ -115,9 +124,10 @@ Always look for `.json` or `.xml` versions of public pages — these can sometim
 ## 10. **IDOR - Read-Only User Can Delete Users**
 **Report ID:** 888729  
 **What Happened:**  
-Two organizations were created: H1 and H2. Each had guest users.  
-In org H2, the admin deleted a guest user. The request was intercepted.  
-By changing the `user_id` in the request to a guest from org H1, the attacker was able to delete that user too.
+Two organizations were created: H1 and H2.  
+Each had guest users.   
+In org H2, the admin deleted a guest user. The request was intercepted.   
+By changing the `user_id` in the request to a guest from org H1, the attacker was able to delete that user too.  
 **[Read Full Report](https://hackerone.com/reports/888729)**
 
 ---
@@ -131,6 +141,7 @@ By changing the `user_id` in the request to a guest from org H1, the attacker wa
 4. Replaced their own ID with the Victim's in the request.  
 5. Changed the username field — now the Victim's account had the attacker's username.  
 6. Used "forgot password" with that username and reset the password — attacker logged in as Victim! 
+  
 **[Read Full Report](https://hackerone.com/reports/1272478)**
 
 ---
@@ -141,7 +152,7 @@ By changing the `user_id` in the request to a guest from org H1, the attacker wa
 2. The post ID was present in the URL.  
 3. They found another user's Spotlight post ID (visible in URLs).  
 4. Replaced their own ID with the victim’s post ID.  
-5. Sent the request — the victim’s post got deleted!
-**Key Insight for Bug Bounty Hunters:**  
-If delete operations use predictable IDs without ownership checks, attackers can delete other users’ content.  
+5. Sent the request — the victim’s post got deleted!  
+**Key Insight:**  
+If delete operations use predictable IDs without ownership checks, attackers can delete other users’ content.   
 **[Read Full Report](https://hackerone.com/reports/1819832)**
