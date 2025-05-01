@@ -10,8 +10,10 @@
 **Report ID:** 751577  
 **What Happened:**  
 An attacker sent a request to the server with a `userid` parameter. They changed the `userid` and were able to see the payment details of other users.  
+
 **Key Insight:**  
 Always test for IDOR vulnerabilities in APIs by verifying if any parameters (like `user-id`) can be modified to access unauthorized data.  
+
 **[Read Full Report](https://hackerone.com/reports/751577)**
 
 ---
@@ -20,8 +22,10 @@ Always test for IDOR vulnerabilities in APIs by verifying if any parameters (lik
 **Report ID:** 2122671  
 **What Happened:**  
 The attacker was logged into two accounts (Account A and Account B) at the same time. They created certifications in both accounts. By using a burp, they changed the ID in the request to delete certifications from another user’s account.  
+
 **Key Insight:**  
 Always verify that the IDs used in requests (such as for certifications or licenses) are properly protected, and ensure that the correct user’s ID is validated before performing sensitive actions like deletion.  
+
 **[Read Full Report](https://hackerone.com/reports/2122671)**
 
 ---
@@ -30,8 +34,10 @@ Always verify that the IDs used in requests (such as for certifications or licen
 **Report ID:** 1969141  
 **What Happened:**  
 The attacker found that the IDs of campaigns were not hidden. By changing the campaign ID in the URL, the attacker was able to delete someone else's campaign.  
+
 **Key Insight:**  
 Always check if any ID is encrypted or encoded in requests. If not, they are vulnerable to manipulation, allowing attackers to perform unauthorized actions (e.g., deleting campaigns).   
+
 **[Read Full Report](https://hackerone.com/reports/1969141)**
 
 ---
@@ -43,6 +49,7 @@ There was a feature to remotely wipe a user’s device using this URL:
 /settings/p/auth/wipe/{device_id}
 But the server didn’t check if the device belonged to the person making the request.  
 By changing `{device_id}` to another user’s ID, an attacker could wipe someone else’s device.  
+
 **[Read Full Report](https://hackerone.com/reports/819807)**
 
 ---
@@ -128,6 +135,7 @@ Two organizations were created: H1 and H2.
 Each had guest users.   
 In org H2, the admin deleted a guest user. The request was intercepted.   
 By changing the `user_id` in the request to a guest from org H1, the attacker was able to delete that user too.  
+
 **[Read Full Report](https://hackerone.com/reports/888729)**
 
 ---
@@ -152,7 +160,9 @@ By changing the `user_id` in the request to a guest from org H1, the attacker wa
 2. The post ID was present in the URL.  
 3. They found another user's Spotlight post ID (visible in URLs).  
 4. Replaced their own ID with the victim’s post ID.  
-5. Sent the request — the victim’s post got deleted!  
+5. Sent the request — the victim’s post got deleted!
+
 **Key Insight:**  
 If delete operations use predictable IDs without ownership checks, attackers can delete other users’ content.   
+
 **[Read Full Report](https://hackerone.com/reports/1819832)**
