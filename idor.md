@@ -194,12 +194,6 @@ If you stumble upon a newly added feature within the web app, such as the abilit
 It is possible that the application may not enforce access control for this new feature as strictly as it does for core features.
 ```
 
-## Hacktivity Reports
+---
 
-### 1. **IDOR - Accessing Payment Data of Other Users**
-**Report ID:** 751577  
-**What Happened:**  
-An attacker sent a request to the server with a `userid` parameter. They changed the `userid` and were able to see the payment details of other users.  
-**Lesson Learned:**  
-Test APIs to make sure that changing the user ID in the URL or request doesn’t let someone see or access other users' private data. This is called **IDOR (Insecure Direct Object Reference)**.  
-**[Read Full Report](https://example.com/report/751577](https://hackerone.com/reports/751577)**
+➡️ **Continue to Part 2:** [IDOR Hacktivity Reports](https://github.com/jannuatharva07/IDOR/blob/main/IDOR-Hacktivity%20Reports.md)
