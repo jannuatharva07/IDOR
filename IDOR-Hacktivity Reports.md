@@ -10,46 +10,44 @@
 **Report ID:** 751577  
 **What Happened:**  
 An attacker sent a request to the server with a `userid` parameter. They changed the `userid` and were able to see the payment details of other users.  
-**Lesson Learned:**  
-Test APIs to make sure that changing the user ID in the URL or request doesn’t let someone see or access other users' private data. This is called **IDOR (Insecure Direct Object Reference)**.  
+**Key Insight:**  
+Always test for IDOR vulnerabilities in APIs by verifying if any parameters (like `user-id`) can be modified to access unauthorized data.  
 **[Read Full Report](https://hackerone.com/reports/751577)**
 
 ---
 
-### 2. **IDOR - Deleting Other User's Certifications**
+## 2. **IDOR - Deleting Other User's Certifications**
 **Report ID:** 2122671  
 **What Happened:**  
 The attacker was logged into two accounts (Account A and Account B) at the same time. They created certifications in both accounts. By using a burp, they changed the ID in the request to delete certifications from another user’s account.  
-**Lesson Learned:**  
-Make sure users can only delete or edit their own data. Don’t allow one user to delete or modify another user's information.  
+**Key Insight:**  
+Always verify that the IDs used in requests (such as for certifications or licenses) are properly protected, and ensure that the correct user’s ID is validated before performing sensitive actions like deletion.  
 **[Read Full Report](https://hackerone.com/reports/2122671)**
 
 ---
 
-### 3. **IDOR - Deleting Campaigns**
+## 3. **IDOR - Deleting Campaigns**
 **Report ID:** 1969141  
 **What Happened:**  
 The attacker found that the IDs of campaigns were not hidden. By changing the campaign ID in the URL, the attacker was able to delete someone else's campaign.  
-**Lesson Learned:**  
-Always hide or encrypt IDs in requests. If users can easily change IDs in URLs, they might be able to perform actions they shouldn't, like deleting data from other users.  
+**Key Insight:**  
+Always check if any ID is encrypted or encoded in requests. If not, they are vulnerable to manipulation, allowing attackers to perform unauthorized actions (e.g., deleting campaigns).   
 **[Read Full Report](https://hackerone.com/reports/1969141)**
 
 ---
 
-### 4. **IDOR - Missing Ownership Check on Remote Wipe**
-**Report ID:** 319807  
+## 4. **IDOR - Missing Ownership Check on Remote Wipe**
+**Report ID:** 819807  
 **What Happened:**  
 There was a feature to remotely wipe a user’s device using this URL:
 /settings/p/auth/wipe/{device_id}
-
 But the server didn’t check if the device belonged to the person making the request.  
 By changing `{device_id}` to another user’s ID, an attacker could wipe someone else’s device.  
-**Lesson:** Always verify **ownership** before performing sensitive operations.  
-**[Read Full Report](https://example.com/report/319807)**
+**[Read Full Report](https://hackerone.com/reports/819807)**
 
 ---
 
-### 5. **IDOR - Edit Anyone's Blog/Website Info**
+## 5. **IDOR - Edit Anyone's Blog/Website Info**
 **Report ID:** 974222  
 **What Happened:**  
 1. Attacker and victim had accounts on a website.  
@@ -57,24 +55,25 @@ By changing `{device_id}` to another user’s ID, an attacker could wipe someone
 3. Attacker viewed source code and noted the victim’s `id`.  
 4. Attacker went to their own profile, intercepted the blog/website update request using Burp Suite.  
 5. They changed the `id` to the victim’s and were able to change victim's blog info.
-
-**Lesson:** Never allow users to update other users’ data just by changing an ID.  
-**[Read Full Report](https://example.com/report/974222)**
+**Key Insight:**  
+Always test if IDs in requests can be modified. Check if changing IDs in user-related data (e.g., blog, website) allows you to access or alter other users’ information.  
+**[Read Full Report](https://hackerone.com/reports/974222)**
 
 ---
 
-### 6. **IDOR - Account Takeover via Edit User (Crowd Signal)**
+## 6. **IDOR - Account Takeover via Edit User (Crowd Signal)**
 **Report ID:** 915114  
 **What Happened:**  
 There was an endpoint that let users edit their own account info.  
 By modifying the `id` in the request URL, the attacker accessed and edited other users’ data.  
 **No user interaction was needed** — attacker didn’t need any help from the victim.  
-**Lesson:** Never trust just the `id` in a request — **always verify the user behind the ID.**  
-**[Read Full Report](https://example.com/report/915114)**
+**Key Insight:**  
+Always check if user-specific actions can be bypassed by simply modifying the `id`.
+**[Read Full Report](https://hackerone.com/reports/915114)**
 
 ---
 
-### 7. **IDOR - Change Product Price During Checkout**
+## 7. **IDOR - Change Product Price During Checkout**
 **Report ID:** 1403176  
 **What Happened:**  
 Attacker changed the price of a product while buying it!  
@@ -84,45 +83,65 @@ Attacker changed the price of a product while buying it!
 3. Intercept the request using **Burp Suite**.
 4. Modify the `price` parameter in the request before it reaches the server.
 5. Forward the request — the product was purchased at the changed (lower) price.
-
-**Lesson:** Never trust prices from the client side — always calculate final price on server side.  
-**[Read Full Report](https://example.com/report/1403176)**
+**[Read Full Report](https://hackerone.com/reports/1403176)**
 
 ---
 
-### 8️⃣ 1213237 – IDOR by Changing Method to DELETE  
-Just changed **GET** to **DELETE** on message endpoint with `msg_id` in URL  
-➡️ Deleted someone else’s message  
-
-
-### 9️⃣ 703894 – JSON Reveals Raw User Data  
-Some endpoints like `.../started.json` expose user data in raw JSON format  
-➡️ No authentication or filtering → Sensitive data exposed
-
----
-
-### 🔟 888729 – Read-Only User Can Delete Users  
-ID was in URL.  
-Two orgs created (H1 and H2) with guest users.  
-➡️ In H2, admin deletes guest → Intercept request  
-➡️ Change ID to guest from H1 → That guest gets deleted 😬  
-❗ No proper permission check → Classic IDOR
+## 8. **IDOR - Message Deletion via HTTP Method Manipulation**
+**Report ID:** 1213237  
+**What Happened:**  
+The attacker was able to delete a message by simply changing the HTTP method.
+**Steps to Reproduce:**
+1. The attacker intercepted a `GET` request that displayed a message.
+2. They changed the request method from `GET` to `DELETE`.
+3. Added the `msg_id` in the URL path.
+4. Sent the modified request — the message got deleted.
+**Key Insight:**  
+Sometimes, **changing the HTTP method** (e.g., `GET` to `DELETE`) can lead to unauthorized actions if the backend does not properly restrict allowed methods. Always test all common HTTP methods on endpoints and observe server behavior.  
+**[Read Full Report](https://hackerone.com/reports/1213237)**
 
 ---
 
-### 🔟 1272478 – ATO (Account Takeover) via IDOR  
-1️⃣ Create 2 accounts – Attacker & Victim  
-2️⃣ Attacker updates their profile → Capture request (contains user ID)  
-3️⃣ Find victim’s user ID  
-4️⃣ Replace attacker’s ID with victim’s in the request  
-5️⃣ Change username → Now victim account is linked to attacker’s username  
-6️⃣ Reset password using that username → 🔓 Logged in as victim 😱  
-❗ No proper ownership check → ATO via IDOR
+## 9. **IDOR - JSON Endpoint Reveals Raw User Data**
+**Report ID:** 703894  
+**What Happened:**  
+Some endpoints (like `.../started.json`) exposed raw user data in JSON format.  
+**Key Insight:**  
+Always look for `.json` or `.xml` versions of public pages — these can sometimes leak more information than intended.    
+**[Read Full Report](https://hackerone.com/reports/703894)**
 
 ---
-### 1️⃣1️⃣ 1819832 – Snapchat: Delete Anyone’s Spotlight Content 📸  
-1️⃣ Attacker captures their own spotlight **delete request**  
-2️⃣ ID of the content is in the request URL  
-3️⃣ Attacker finds another post’s ID (visible in spotlight URLs)  
-4️⃣ Changes the ID in the request → Deletes someone else’s post ❌  
-❗ No ownership check on delete request = IDOR!
+
+## 10. **IDOR - Read-Only User Can Delete Users**
+**Report ID:** 888729  
+**What Happened:**  
+Two organizations were created: H1 and H2. Each had guest users.  
+In org H2, the admin deleted a guest user. The request was intercepted.  
+By changing the `user_id` in the request to a guest from org H1, the attacker was able to delete that user too.
+**[Read Full Report](https://hackerone.com/reports/888729)**
+
+---
+
+## 11. **IDOR - Account Takeover via Profile Update**
+**Report ID:** 1272478  
+**What Happened:**  
+1. Two accounts were created: Attacker and Victim.  
+2. Attacker updated their own profile and captured the request (which included their `user_id`).  
+3. They found the Victim's user ID.  
+4. Replaced their own ID with the Victim's in the request.  
+5. Changed the username field — now the Victim's account had the attacker's username.  
+6. Used "forgot password" with that username and reset the password — attacker logged in as Victim! 
+**[Read Full Report](https://hackerone.com/reports/1272478)**
+
+---
+## 12. **IDOR - Delete Anyone’s Spotlight Content (Snapchat)**
+**Report ID:** 1819832  
+**What Happened:**  
+1. Attacker captured the request to delete their own Spotlight post.  
+2. The post ID was present in the URL.  
+3. They found another user's Spotlight post ID (visible in URLs).  
+4. Replaced their own ID with the victim’s post ID.  
+5. Sent the request — the victim’s post got deleted!
+**Key Insight for Bug Bounty Hunters:**  
+If delete operations use predictable IDs without ownership checks, attackers can delete other users’ content.  
+**[Read Full Report](https://hackerone.com/reports/1819832)**
